@@ -72,4 +72,8 @@ export class SDK extends Service {
   public async getToken(): Promise<string> {
     return await this.contract.token();
   }
+
+  public async enroll(callbacks: CallbackOptionsType): Promise<void> {
+    await this.submitAction(async () => this.contract.enroll(), callbacks);
+  }
 }
