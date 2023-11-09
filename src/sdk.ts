@@ -28,7 +28,7 @@ export class SDK extends Service {
     super();
     this.signer = provider.getSigner();
     this.contract = Prottery__factory.connect(
-      config.localhost.PROTTERY,
+      config.get(provider.network.chainId)!.PROTTERY,
       this.signer
     );
   }
