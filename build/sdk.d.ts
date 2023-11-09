@@ -15,9 +15,14 @@ export type CallbackOptionsType = {
 export declare class SDK extends Service {
     contract: Prottery;
     signer: Signer;
-    constructor({ provider, }: {
+    address?: string;
+    chainId: number;
+    DEFAULT_CHAIN_ID: number;
+    constructor({ provider, chainId, }: {
         provider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider;
+        chainId?: number;
     });
+    init(): Promise<void>;
     getNumberOfParticipants(): Promise<BigNumber>;
     getBalanceOf(account: string): Promise<BigNumber>;
     getJackpot(): Promise<string>;

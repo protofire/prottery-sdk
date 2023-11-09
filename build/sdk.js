@@ -14,10 +14,18 @@ const service_1 = require("./service");
 const contracts_1 = require("./contracts");
 const config_1 = require("./config");
 class SDK extends service_1.Service {
-    constructor({ provider, }) {
+    constructor({ provider, chainId, }) {
+        var _a;
         super();
+        this.DEFAULT_CHAIN_ID = 11155111;
         this.signer = provider.getSigner();
-        this.contract = contracts_1.Prottery__factory.connect(config_1.config.get(provider.network.chainId).PROTTERY, this.signer);
+        this.chainId = (_a = chainId !== null && chainId !== void 0 ? chainId : provider.network.chainId) !== null && _a !== void 0 ? _a : this.DEFAULT_CHAIN_ID;
+        this.contract = contracts_1.Prottery__factory.connect(config_1.config.get(this.chainId).PROTTERY, this.signer);
+    }
+    init() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.address = yield this.signer.getAddress();
+        });
     }
     getNumberOfParticipants() {
         return __awaiter(this, void 0, void 0, function* () {
