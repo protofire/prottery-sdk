@@ -19,18 +19,29 @@ export type CallbackOptionsType = {
 export class SDK extends Service {
   public contract: Prottery;
   public signer: Signer;
+  public address?: string;
+  public chainId: number;
+  public DEFAULT_CHAIN_ID = 11155111;
 
   constructor({
     provider,
+    chainId,
   }: {
     provider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider;
+    chainId?: number;
   }) {
     super();
     this.signer = provider.getSigner();
+    this.chainId = chainId ?? provider.network.chainId ?? this.DEFAULT_CHAIN_ID;
     this.contract = Prottery__factory.connect(
-      config.get(provider.network.chainId)!.PROTTERY,
+      config.get(this.chainId)!.PROTTERY,
       this.signer
     );
+
+  }
+
+  public async init(): Promise<void> {
+    this.address = await this.signer.getAddress();
   }
 
   public async getNumberOfParticipants(): Promise<BigNumber> {
