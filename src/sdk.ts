@@ -80,4 +80,8 @@ export class SDK extends Service {
   public async quit(callbacks: CallbackOptionsType): Promise<void> {
     await this.submitAction(async () => this.contract.quit(), callbacks);
   }
+
+  public async claim(callbacks: CallbackOptionsType): Promise<void> {
+    await this.submitAction(async () => this.contract.claim(), callbacks);
+  }
 }

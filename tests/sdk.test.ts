@@ -263,4 +263,59 @@ describe("SDK", () => {
       });
     });
   });
+
+  describe("claim", () => {
+    const tx = mock<ethers.ContractTransaction>();
+    const onSubmitted = jest.fn();
+    const onSuccess = jest.fn();
+    const onError = jest.fn();
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    describe("when transaction fails", () => {
+      beforeEach(() => {
+        jest.spyOn(tx, "wait").mockImplementation(() => {
+          throw Error("something went wrong");
+        });
+      });
+
+      test("callbacks onSubmitted and onError", async () => {
+        const claimFunction =
+          jest
+            .spyOn(prottery, "claim")
+            .mockImplementation(async () => tx);
+
+        await sdk.claim({ onSubmitted, onSuccess, onError });
+
+        expect(claimFunction).toBeCalledTimes(1);
+        expect(onSubmitted).toBeCalledTimes(1);
+        expect(onSuccess).not.toBeCalledTimes(1);
+        expect(onError).toBeCalledTimes(1);
+      });
+    });
+
+    describe("when transaction succeeds", () => {
+      beforeEach(() => {
+        const receipt = mock<ethers.ContractReceipt>();
+
+        jest.spyOn(tx, "wait").mockImplementation(async () => receipt);
+      });
+
+      test("callbacks onSubmitted and onSuccess", async () => {
+        const claimFunction =
+          jest
+            .spyOn(prottery, "claim")
+            .mockImplementation(async () => tx);
+
+        await sdk.claim({ onSubmitted, onSuccess, onError });
+
+        expect(claimFunction).toBeCalledTimes(1);
+        expect(onSubmitted).toBeCalledTimes(1);
+        expect(onSuccess).toBeCalledTimes(1);
+        expect(onError).not.toBeCalled();
+      });
+    });
+  });
 });
