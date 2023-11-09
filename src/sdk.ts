@@ -76,4 +76,8 @@ export class SDK extends Service {
   public async enroll(callbacks: CallbackOptionsType): Promise<void> {
     await this.submitAction(async () => this.contract.enroll(), callbacks);
   }
+
+  public async quit(callbacks: CallbackOptionsType): Promise<void> {
+    await this.submitAction(async () => this.contract.quit(), callbacks);
+  }
 }
