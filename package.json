@@ -25,7 +25,8 @@
   "scripts": {
     "typechain": "typechain --target=ethers-v5 --out-dir=src/contracts src/abis/*.json",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@apollo/client": "^3.8.7",
