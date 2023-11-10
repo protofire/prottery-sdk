@@ -2,6 +2,7 @@ import { BigNumber, Signer, ethers } from "ethers";
 import { Service } from "./service";
 import { Prottery, Prottery__factory } from "./contracts";
 import { config } from "./config";
+import { Graph } from "./graph";
 
 export type CallbackOptionsType = {
   onSubmitted?: ({ tx }: { tx: ethers.ContractTransaction }) => void;
@@ -22,22 +23,25 @@ export class SDK extends Service {
   public address?: string;
   public chainId: number;
   public DEFAULT_CHAIN_ID = 11155111;
+  public graph?: Graph;
 
   constructor({
     provider,
     chainId,
+    subgraphUri,
   }: {
     provider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider;
     chainId?: number;
+    subgraphUri?: string;
   }) {
     super();
+    if (subgraphUri) this.graph = new Graph(subgraphUri);
     this.signer = provider.getSigner();
     this.chainId = chainId ?? provider.network.chainId ?? this.DEFAULT_CHAIN_ID;
     this.contract = Prottery__factory.connect(
       config.get(this.chainId)!.PROTTERY,
-      this.signer
+      this.signer,
     );
-
   }
 
   public async init(): Promise<void> {

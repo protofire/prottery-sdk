@@ -939,27 +939,13 @@
     "absolutePath": "src/contracts/Prottery.sol",
     "id": 46679,
     "exportedSymbols": {
-      "IERC20": [
-        45642
-      ],
-      "Jackpot": [
-        46333
-      ],
-      "Ownable": [
-        44912
-      ],
-      "Prottery": [
-        46678
-      ],
-      "ProtteryErrors": [
-        46719
-      ],
-      "ProtteryEvents": [
-        46736
-      ],
-      "StateMachine": [
-        46065
-      ]
+      "IERC20": [45642],
+      "Jackpot": [46333],
+      "Ownable": [44912],
+      "Prottery": [46678],
+      "ProtteryErrors": [46719],
+      "ProtteryEvents": [46736],
+      "StateMachine": [46065]
     },
     "nodeType": "SourceUnit",
     "src": "39:3127:37",
@@ -969,12 +955,7 @@
         "nodeType": "PragmaDirective",
         "src": "39:24:37",
         "nodes": [],
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".13"
-        ]
+        "literals": ["solidity", "^", "0.8", ".13"]
       },
       {
         "id": 46337,
@@ -2056,9 +2037,7 @@
                 "modifierName": {
                   "id": 46426,
                   "name": "Ownable",
-                  "nameLocations": [
-                    "1352:7:37"
-                  ],
+                  "nameLocations": ["1352:7:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 44912,
                   "src": "1352:7:37"
@@ -2400,9 +2379,7 @@
                 "modifierName": {
                   "id": 46442,
                   "name": "rejectStatus",
-                  "nameLocations": [
-                    "1464:12:37"
-                  ],
+                  "nameLocations": ["1464:12:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46064,
                   "src": "1464:12:37"
@@ -2446,9 +2423,7 @@
                 "modifierName": {
                   "id": 46446,
                   "name": "rejectStatus",
-                  "nameLocations": [
-                    "1489:12:37"
-                  ],
+                  "nameLocations": ["1489:12:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46064,
                   "src": "1489:12:37"
@@ -2491,9 +2466,7 @@
                 "modifierName": {
                   "id": 46450,
                   "name": "notEnrolled",
-                  "nameLocations": [
-                    "1521:11:37"
-                  ],
+                  "nameLocations": ["1521:11:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46387,
                   "src": "1521:11:37"
@@ -2778,9 +2751,7 @@
                 "modifierName": {
                   "id": 46475,
                   "name": "rejectStatus",
-                  "nameLocations": [
-                    "1717:12:37"
-                  ],
+                  "nameLocations": ["1717:12:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46064,
                   "src": "1717:12:37"
@@ -2824,9 +2795,7 @@
                 "modifierName": {
                   "id": 46479,
                   "name": "rejectStatus",
-                  "nameLocations": [
-                    "1742:12:37"
-                  ],
+                  "nameLocations": ["1742:12:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46064,
                   "src": "1742:12:37"
@@ -2869,9 +2838,7 @@
                 "modifierName": {
                   "id": 46483,
                   "name": "onlyEnrolled",
-                  "nameLocations": [
-                    "1774:12:37"
-                  ],
+                  "nameLocations": ["1774:12:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46405,
                   "src": "1774:12:37"
@@ -3382,9 +3349,7 @@
                 "modifierName": {
                   "id": 46512,
                   "name": "allowStatus",
-                  "nameLocations": [
-                    "2004:11:37"
-                  ],
+                  "nameLocations": ["2004:11:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46048,
                   "src": "2004:11:37"
@@ -3398,9 +3363,7 @@
                 "modifierName": {
                   "id": 46516,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "2029:9:37"
-                  ],
+                  "nameLocations": ["2029:9:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 44823,
                   "src": "2029:9:37"
@@ -3805,9 +3768,7 @@
                 "modifierName": {
                   "id": 46555,
                   "name": "allowStatus",
-                  "nameLocations": [
-                    "2304:11:37"
-                  ],
+                  "nameLocations": ["2304:11:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46048,
                   "src": "2304:11:37"
@@ -3821,9 +3782,7 @@
                 "modifierName": {
                   "id": 46559,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "2331:9:37"
-                  ],
+                  "nameLocations": ["2331:9:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 44823,
                   "src": "2331:9:37"
@@ -3976,9 +3935,7 @@
                 "modifierName": {
                   "id": 46589,
                   "name": "onlyJackpot",
-                  "nameLocations": [
-                    "2586:11:37"
-                  ],
+                  "nameLocations": ["2586:11:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46420,
                   "src": "2586:11:37"
@@ -4022,9 +3979,7 @@
                 "modifierName": {
                   "id": 46591,
                   "name": "allowStatus",
-                  "nameLocations": [
-                    "2598:11:37"
-                  ],
+                  "nameLocations": ["2598:11:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46048,
                   "src": "2598:11:37"
@@ -4401,9 +4356,7 @@
                 "modifierName": {
                   "id": 46610,
                   "name": "allowStatus",
-                  "nameLocations": [
-                    "2739:11:37"
-                  ],
+                  "nameLocations": ["2739:11:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 46048,
                   "src": "2739:11:37"
@@ -4417,9 +4370,7 @@
                 "modifierName": {
                   "id": 46614,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "2770:9:37"
-                  ],
+                  "nameLocations": ["2770:9:37"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 44823,
                   "src": "2770:9:37"
@@ -4934,9 +4885,7 @@
             "baseName": {
               "id": 46348,
               "name": "Ownable",
-              "nameLocations": [
-                "453:7:37"
-              ],
+              "nameLocations": ["453:7:37"],
               "nodeType": "IdentifierPath",
               "referencedDeclaration": 44912,
               "src": "453:7:37"
@@ -4949,9 +4898,7 @@
             "baseName": {
               "id": 46350,
               "name": "StateMachine",
-              "nameLocations": [
-                "462:12:37"
-              ],
+              "nameLocations": ["462:12:37"],
               "nodeType": "IdentifierPath",
               "referencedDeclaration": 46065,
               "src": "462:12:37"
@@ -4965,31 +4912,12 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "linearizedBaseContracts": [
-          46678,
-          46065,
-          44912,
-          45690
-        ],
+        "linearizedBaseContracts": [46678, 46065, 44912, 45690],
         "name": "Prottery",
         "nameLocation": "441:8:37",
         "scope": 46679,
-        "usedErrors": [
-          44778,
-          44783,
-          46032,
-          46710,
-          46712,
-          46714,
-          46716,
-          46718
-        ],
-        "usedEvents": [
-          44789,
-          46725,
-          46729,
-          46735
-        ]
+        "usedErrors": [44778, 44783, 46032, 46710, 46712, 46714, 46716, 46718],
+        "usedEvents": [44789, 46725, 46729, 46735]
       }
     ],
     "license": "UNLICENSED"

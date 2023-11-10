@@ -13,11 +13,14 @@ exports.SDK = void 0;
 const service_1 = require("./service");
 const contracts_1 = require("./contracts");
 const config_1 = require("./config");
+const graph_1 = require("./graph");
 class SDK extends service_1.Service {
-    constructor({ provider, chainId, }) {
+    constructor({ provider, chainId, subgraphUri, }) {
         var _a;
         super();
         this.DEFAULT_CHAIN_ID = 11155111;
+        if (subgraphUri)
+            this.graph = new graph_1.Graph(subgraphUri);
         this.signer = provider.getSigner();
         this.chainId = (_a = chainId !== null && chainId !== void 0 ? chainId : provider.network.chainId) !== null && _a !== void 0 ? _a : this.DEFAULT_CHAIN_ID;
         this.contract = contracts_1.Prottery__factory.connect(config_1.config.get(this.chainId).PROTTERY, this.signer);

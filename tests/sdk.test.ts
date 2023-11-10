@@ -43,7 +43,9 @@ describe("SDK", () => {
     test("returns number of participants", async () => {
       const count = BigNumber.from(5);
 
-      const numberOfParticipantsFunction = jest.spyOn(prottery, "numberOfParticipants").mockImplementation(async () => count);
+      const numberOfParticipantsFunction = jest
+        .spyOn(prottery, "numberOfParticipants")
+        .mockImplementation(async () => count);
       const numberOfParticipants = await sdk.getNumberOfParticipants();
 
       expect(numberOfParticipantsFunction).toBeCalledTimes(1);
@@ -56,7 +58,9 @@ describe("SDK", () => {
       const balance = ethers.utils.parseEther("100");
       const account = "0x0000000000000000000000000000000000000002";
 
-      const balanceOfFunction = jest.spyOn(prottery, "balanceOf").mockImplementation(async () => balance);
+      const balanceOfFunction = jest
+        .spyOn(prottery, "balanceOf")
+        .mockImplementation(async () => balance);
       const value = await sdk.getBalanceOf(account);
 
       expect(balanceOfFunction).toBeCalledWith(account);
@@ -69,7 +73,9 @@ describe("SDK", () => {
     test("returns jackpot address", async () => {
       const jackpotAddress = "0x0000000000000000000000000000000000000003";
 
-      const jackpotFunction = jest.spyOn(prottery, "jackpot").mockImplementation(async () => jackpotAddress);
+      const jackpotFunction = jest
+        .spyOn(prottery, "jackpot")
+        .mockImplementation(async () => jackpotAddress);
       const value = await sdk.getJackpot();
 
       expect(jackpotFunction).toBeCalledTimes(1);
@@ -81,7 +87,9 @@ describe("SDK", () => {
     test("returns owner address", async () => {
       const ownerAddress = "0x0000000000000000000000000000000000000002";
 
-      const ownerFunction = jest.spyOn(prottery, "owner").mockImplementation(async () => ownerAddress);
+      const ownerFunction = jest
+        .spyOn(prottery, "owner")
+        .mockImplementation(async () => ownerAddress);
       const value = await sdk.getOwner();
 
       expect(ownerFunction).toBeCalledTimes(1);
@@ -94,7 +102,9 @@ describe("SDK", () => {
       const active = true;
       const participantAddress = "0x0000000000000000000000000000000000000002";
 
-      const participantsFunction = jest.spyOn(prottery, "participants").mockImplementation(async () => active);
+      const participantsFunction = jest
+        .spyOn(prottery, "participants")
+        .mockImplementation(async () => active);
       const value = await sdk.getParticipants(participantAddress);
 
       expect(participantsFunction).toBeCalledWith(participantAddress);
@@ -108,7 +118,9 @@ describe("SDK", () => {
     test("returns lottery prize amount", async () => {
       const prize = ethers.utils.parseEther("10");
 
-      const prizeFunction = jest.spyOn(prottery, "prize").mockImplementation(async () => prize);
+      const prizeFunction = jest
+        .spyOn(prottery, "prize")
+        .mockImplementation(async () => prize);
       const value = await sdk.getPrize();
 
       expect(prizeFunction).toBeCalledTimes(1);
@@ -120,7 +132,9 @@ describe("SDK", () => {
     test("returns lottery random value", async () => {
       const random = BigNumber.from(123);
 
-      const randomFunction = jest.spyOn(prottery, "random").mockImplementation(async () => random);
+      const randomFunction = jest
+        .spyOn(prottery, "random")
+        .mockImplementation(async () => random);
       const value = await sdk.getRandom();
 
       expect(randomFunction).toBeCalledTimes(1);
@@ -132,7 +146,9 @@ describe("SDK", () => {
     test("returns lottery status", async () => {
       const status = 0;
 
-      const statusFunction = jest.spyOn(prottery, "status").mockImplementation(async () => status);
+      const statusFunction = jest
+        .spyOn(prottery, "status")
+        .mockImplementation(async () => status);
       const value = await sdk.getStatus();
 
       expect(statusFunction).toBeCalledTimes(1);
@@ -144,7 +160,9 @@ describe("SDK", () => {
     test("returns lottery threshold", async () => {
       const threshold = BigNumber.from("120");
 
-      const thresholdFunction = jest.spyOn(prottery, "threshold").mockImplementation(async () => threshold);
+      const thresholdFunction = jest
+        .spyOn(prottery, "threshold")
+        .mockImplementation(async () => threshold);
       const value = await sdk.getThreshold();
 
       expect(thresholdFunction).toBeCalledTimes(1);
@@ -156,7 +174,9 @@ describe("SDK", () => {
     test("returns token address", async () => {
       const tokenAddress = "0x0000000000000000000000000000000000000004";
 
-      const tokenFunction = jest.spyOn(prottery, "token").mockImplementation(async () => tokenAddress);
+      const tokenFunction = jest
+        .spyOn(prottery, "token")
+        .mockImplementation(async () => tokenAddress);
       const value = await sdk.getToken();
 
       expect(tokenFunction).toBeCalledTimes(1);
@@ -182,10 +202,9 @@ describe("SDK", () => {
       });
 
       test("callbacks onSubmitted and onError", async () => {
-        const enrollFunction =
-          jest
-            .spyOn(prottery, "enroll")
-            .mockImplementation(async () => tx);
+        const enrollFunction = jest
+          .spyOn(prottery, "enroll")
+          .mockImplementation(async () => tx);
 
         await sdk.enroll({ onSubmitted, onSuccess, onError });
 
@@ -204,10 +223,9 @@ describe("SDK", () => {
       });
 
       test("callbacks onSubmitted and onSuccess", async () => {
-        const enrollFunction =
-          jest
-            .spyOn(prottery, "enroll")
-            .mockImplementation(async () => tx);
+        const enrollFunction = jest
+          .spyOn(prottery, "enroll")
+          .mockImplementation(async () => tx);
 
         await sdk.enroll({ onSubmitted, onSuccess, onError });
 
@@ -237,10 +255,9 @@ describe("SDK", () => {
       });
 
       test("callbacks onSubmitted and onError", async () => {
-        const quitFunction =
-          jest
-            .spyOn(prottery, "quit")
-            .mockImplementation(async () => tx);
+        const quitFunction = jest
+          .spyOn(prottery, "quit")
+          .mockImplementation(async () => tx);
 
         await sdk.quit({ onSubmitted, onSuccess, onError });
 
@@ -259,10 +276,9 @@ describe("SDK", () => {
       });
 
       test("callbacks onSubmitted and onSuccess", async () => {
-        const quitFunction =
-          jest
-            .spyOn(prottery, "quit")
-            .mockImplementation(async () => tx);
+        const quitFunction = jest
+          .spyOn(prottery, "quit")
+          .mockImplementation(async () => tx);
 
         await sdk.quit({ onSubmitted, onSuccess, onError });
 
@@ -292,10 +308,9 @@ describe("SDK", () => {
       });
 
       test("callbacks onSubmitted and onError", async () => {
-        const claimFunction =
-          jest
-            .spyOn(prottery, "claim")
-            .mockImplementation(async () => tx);
+        const claimFunction = jest
+          .spyOn(prottery, "claim")
+          .mockImplementation(async () => tx);
 
         await sdk.claim({ onSubmitted, onSuccess, onError });
 
@@ -314,10 +329,9 @@ describe("SDK", () => {
       });
 
       test("callbacks onSubmitted and onSuccess", async () => {
-        const claimFunction =
-          jest
-            .spyOn(prottery, "claim")
-            .mockImplementation(async () => tx);
+        const claimFunction = jest
+          .spyOn(prottery, "claim")
+          .mockImplementation(async () => tx);
 
         await sdk.claim({ onSubmitted, onSuccess, onError });
 
