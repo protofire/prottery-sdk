@@ -4,7 +4,7 @@ import { CallbackOptionsType } from "./sdk";
 export abstract class Service {
   protected async submitAction(
     action: () => Promise<ethers.ContractTransaction>,
-    callbacks: CallbackOptionsType
+    callbacks: CallbackOptionsType,
   ) {
     const { onSubmitted, onSuccess, onError, onRejected } = callbacks;
 

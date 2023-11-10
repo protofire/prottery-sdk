@@ -40,7 +40,7 @@ export class SDK extends Service {
     this.chainId = chainId ?? provider.network.chainId ?? this.DEFAULT_CHAIN_ID;
     this.contract = Prottery__factory.connect(
       config.get(this.chainId)!.PROTTERY,
-      this.signer
+      this.signer,
     );
   }
 

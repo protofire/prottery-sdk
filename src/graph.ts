@@ -5,11 +5,9 @@ import {
   gql,
 } from "@apollo/client/core";
 
-// "https://api.studio.thegraph.com/query/8290/prottery/version/latest"
-
 type Participant = {
   id: string;
-}
+};
 
 export class Graph {
   public client: ApolloClient<NormalizedCacheObject>;
