@@ -6,9 +6,11 @@ import { Prottery } from "../src/contracts/Prottery";
 import { SDK } from "../src/sdk";
 import { JsonRpcProvider, JsonRpcSigner } from "@ethersproject/providers";
 
+const ADDRESS = "0x0000000000000000000000000000000000000001";
+
 const mockSdk = () => {
   const mockSigner = mock<JsonRpcSigner>();
-  mockSigner.getAddress.calledWith().mockImplementation(async () => "0x0000000000000000000000000000000000000001");
+  mockSigner.getAddress.calledWith().mockImplementation(async () => ADDRESS);
   const mockProvider = mock<JsonRpcProvider>();
   mockProvider.getSigner.calledWith().mockImplementation(() => mockSigner);
 
@@ -27,6 +29,14 @@ describe("SDK", () => {
     prottery = mock<Prottery>();
     jest.spyOn(Prottery__factory, "connect").mockImplementation(() => prottery);
     sdk = mockSdk();
+  });
+
+  describe("init", () => {
+    test("populates account address", async () => {
+      await sdk.init();
+
+      expect(sdk.address).toBe(ADDRESS);
+    });
   });
 
   describe("getNumberOfParticipants", () => {
