@@ -33,8 +33,8 @@ class Graph {
         }
       }
     `;
-            const { data } = yield this.query(body);
-            return data;
+            const { data: { participants }, } = yield this.query(body);
+            return participants;
         });
     }
 }

@@ -20,8 +20,8 @@ export declare class SDK extends Service {
     chainId: number;
     DEFAULT_CHAIN_ID: number;
     graph?: Graph;
-    constructor({ provider, chainId, subgraphUri, }: {
-        provider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider;
+    constructor({ signerOrProvider, chainId, subgraphUri, }: {
+        signerOrProvider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider | ethers.Signer;
         chainId?: number;
         subgraphUri?: string;
     });

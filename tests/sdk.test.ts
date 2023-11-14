@@ -15,7 +15,7 @@ const mockSdk = () => {
   mockProvider.getSigner.calledWith().mockImplementation(() => mockSigner);
 
   const sdk = new SDK({
-    provider: mockProvider,
+    signerOrProvider: mockProvider,
   });
 
   return sdk;

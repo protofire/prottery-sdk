@@ -17,6 +17,15 @@ export type CallbackOptionsType = {
   onRejected?: () => void;
 };
 
+const isSigner = (
+  signerOrProvider:
+    | ethers.providers.Web3Provider
+    | ethers.providers.JsonRpcProvider
+    | ethers.Signer
+): signerOrProvider is ethers.Signer => {
+  return (signerOrProvider as ethers.providers.JsonRpcProvider).getSigner === undefined;
+};
+
 export class SDK extends Service {
   public contract: Prottery;
   public signer: Signer;
@@ -26,21 +35,30 @@ export class SDK extends Service {
   public graph?: Graph;
 
   constructor({
-    provider,
+    signerOrProvider,
     chainId,
     subgraphUri,
   }: {
-    provider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider;
+    signerOrProvider:
+      | ethers.providers.Web3Provider
+      | ethers.providers.JsonRpcProvider
+      | ethers.Signer;
     chainId?: number;
     subgraphUri?: string;
   }) {
     super();
     if (subgraphUri) this.graph = new Graph(subgraphUri);
-    this.signer = provider.getSigner();
-    this.chainId = chainId ?? provider.network.chainId ?? this.DEFAULT_CHAIN_ID;
+
+    if (isSigner(signerOrProvider)) {
+      this.signer = signerOrProvider;
+    } else {
+      this.signer = signerOrProvider.getSigner();
+    }
+
+    this.chainId = chainId ?? this.DEFAULT_CHAIN_ID;
     this.contract = Prottery__factory.connect(
       config.get(this.chainId)!.PROTTERY,
-      this.signer,
+      this.signer
     );
   }
 
