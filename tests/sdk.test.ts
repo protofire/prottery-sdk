@@ -342,4 +342,169 @@ describe("SDK", () => {
       });
     });
   });
+
+  describe("launch", () => {
+    const tx = mock<ethers.ContractTransaction>();
+    const onSubmitted = jest.fn();
+    const onSuccess = jest.fn();
+    const onError = jest.fn();
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    describe("when transaction fails", () => {
+      beforeEach(() => {
+        jest.spyOn(tx, "wait").mockImplementation(() => {
+          throw Error("something went wrong");
+        });
+      });
+
+      test("callbacks onSubmitted and onError", async () => {
+        const launchFunction = jest
+          .spyOn(prottery, "launch")
+          .mockImplementation(async () => tx);
+
+        const threshold = BigNumber.from(120);
+        const prize = ethers.utils.parseEther("50");
+
+        await sdk.launch(threshold, prize, { onSubmitted, onSuccess, onError });
+
+        expect(launchFunction).toBeCalledTimes(1);
+        expect(onSubmitted).toBeCalledTimes(1);
+        expect(onSuccess).not.toBeCalledTimes(1);
+        expect(onError).toBeCalledTimes(1);
+      });
+    });
+
+    describe("when transaction succeeds", () => {
+      beforeEach(() => {
+        const receipt = mock<ethers.ContractReceipt>();
+
+        jest.spyOn(tx, "wait").mockImplementation(async () => receipt);
+      });
+
+      test("callbacks onSubmitted and onSuccess", async () => {
+        const launchFunction = jest
+          .spyOn(prottery, "launch")
+          .mockImplementation(async () => tx);
+
+        const threshold = BigNumber.from(120);
+        const prize = ethers.utils.parseEther("50");
+
+        await sdk.launch(threshold, prize, { onSubmitted, onSuccess, onError });
+
+        expect(launchFunction).toBeCalledTimes(1);
+        expect(onSubmitted).toBeCalledTimes(1);
+        expect(onSuccess).toBeCalledTimes(1);
+        expect(onError).not.toBeCalled();
+      });
+    });
+  });
+
+  describe("raffle", () => {
+    const tx = mock<ethers.ContractTransaction>();
+    const onSubmitted = jest.fn();
+    const onSuccess = jest.fn();
+    const onError = jest.fn();
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    describe("when transaction fails", () => {
+      beforeEach(() => {
+        jest.spyOn(tx, "wait").mockImplementation(() => {
+          throw Error("something went wrong");
+        });
+      });
+
+      test("callbacks onSubmitted and onError", async () => {
+        const raffleFunction = jest
+          .spyOn(prottery, "raffle")
+          .mockImplementation(async () => tx);
+
+        await sdk.raffle({ onSubmitted, onSuccess, onError });
+
+        expect(raffleFunction).toBeCalledTimes(1);
+        expect(onSubmitted).toBeCalledTimes(1);
+        expect(onSuccess).not.toBeCalledTimes(1);
+        expect(onError).toBeCalledTimes(1);
+      });
+    });
+
+    describe("when transaction succeeds", () => {
+      beforeEach(() => {
+        const receipt = mock<ethers.ContractReceipt>();
+
+        jest.spyOn(tx, "wait").mockImplementation(async () => receipt);
+      });
+
+      test("callbacks onSubmitted and onSuccess", async () => {
+        const raffleFunction = jest
+          .spyOn(prottery, "raffle")
+          .mockImplementation(async () => tx);
+
+        await sdk.raffle({ onSubmitted, onSuccess, onError });
+
+        expect(raffleFunction).toBeCalledTimes(1);
+        expect(onSubmitted).toBeCalledTimes(1);
+        expect(onSuccess).toBeCalledTimes(1);
+        expect(onError).not.toBeCalled();
+      });
+    });
+  });
+
+  describe("finish", () => {
+    const tx = mock<ethers.ContractTransaction>();
+    const onSubmitted = jest.fn();
+    const onSuccess = jest.fn();
+    const onError = jest.fn();
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    describe("when transaction fails", () => {
+      beforeEach(() => {
+        jest.spyOn(tx, "wait").mockImplementation(() => {
+          throw Error("something went wrong");
+        });
+      });
+
+      test("callbacks onSubmitted and onError", async () => {
+        const finishFunction = jest
+          .spyOn(prottery, "finish")
+          .mockImplementation(async () => tx);
+
+        await sdk.finish(ADDRESS, { onSubmitted, onSuccess, onError });
+
+        expect(finishFunction).toBeCalledTimes(1);
+        expect(onSubmitted).toBeCalledTimes(1);
+        expect(onSuccess).not.toBeCalledTimes(1);
+        expect(onError).toBeCalledTimes(1);
+      });
+    });
+
+    describe("when transaction succeeds", () => {
+      beforeEach(() => {
+        const receipt = mock<ethers.ContractReceipt>();
+
+        jest.spyOn(tx, "wait").mockImplementation(async () => receipt);
+      });
+
+      test("callbacks onSubmitted and onSuccess", async () => {
+        const finishFunction = jest
+          .spyOn(prottery, "finish")
+          .mockImplementation(async () => tx);
+
+        await sdk.finish(ADDRESS, { onSubmitted, onSuccess, onError });
+
+        expect(finishFunction).toBeCalledTimes(1);
+        expect(onSubmitted).toBeCalledTimes(1);
+        expect(onSuccess).toBeCalledTimes(1);
+        expect(onError).not.toBeCalled();
+      });
+    });
+  });
 });

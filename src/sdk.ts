@@ -21,9 +21,12 @@ const isSigner = (
   signerOrProvider:
     | ethers.providers.Web3Provider
     | ethers.providers.JsonRpcProvider
-    | ethers.Signer
+    | ethers.Signer,
 ): signerOrProvider is ethers.Signer => {
-  return (signerOrProvider as ethers.providers.JsonRpcProvider).getSigner === undefined;
+  return (
+    (signerOrProvider as ethers.providers.JsonRpcProvider).getSigner ===
+    undefined
+  );
 };
 
 export class SDK extends Service {
@@ -58,7 +61,7 @@ export class SDK extends Service {
     this.chainId = chainId ?? this.DEFAULT_CHAIN_ID;
     this.contract = Prottery__factory.connect(
       config.get(this.chainId)!.PROTTERY,
-      this.signer
+      this.signer,
     );
   }
 
@@ -116,5 +119,30 @@ export class SDK extends Service {
 
   public async claim(callbacks: CallbackOptionsType): Promise<void> {
     await this.submitAction(async () => this.contract.claim(), callbacks);
+  }
+
+  public async launch(
+    threshold: BigNumber,
+    prize: BigNumber,
+    callbacks: CallbackOptionsType,
+  ): Promise<void> {
+    await this.submitAction(
+      async () => this.contract.launch(threshold, prize),
+      callbacks,
+    );
+  }
+
+  public async raffle(callbacks: CallbackOptionsType): Promise<void> {
+    await this.submitAction(async () => this.contract.raffle(), callbacks);
+  }
+
+  public async finish(
+    winner: string,
+    callbacks: CallbackOptionsType,
+  ): Promise<void> {
+    await this.submitAction(
+      async () => this.contract.finish(winner),
+      callbacks,
+    );
   }
 }
