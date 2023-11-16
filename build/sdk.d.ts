@@ -39,5 +39,8 @@ export declare class SDK extends Service {
     enroll(callbacks: CallbackOptionsType): Promise<void>;
     quit(callbacks: CallbackOptionsType): Promise<void>;
     claim(callbacks: CallbackOptionsType): Promise<void>;
+    launch(threshold: BigNumber, prize: BigNumber, callbacks: CallbackOptionsType): Promise<void>;
+    raffle(callbacks: CallbackOptionsType): Promise<void>;
+    finish(winner: string, callbacks: CallbackOptionsType): Promise<void>;
 }
 //# sourceMappingURL=sdk.d.ts.map

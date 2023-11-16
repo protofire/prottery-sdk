@@ -15,7 +15,8 @@ const contracts_1 = require("./contracts");
 const config_1 = require("./config");
 const graph_1 = require("./graph");
 const isSigner = (signerOrProvider) => {
-    return signerOrProvider.getSigner === undefined;
+    return (signerOrProvider.getSigner ===
+        undefined);
 };
 class SDK extends service_1.Service {
     constructor({ signerOrProvider, chainId, subgraphUri, }) {
@@ -100,6 +101,21 @@ class SDK extends service_1.Service {
     claim(callbacks) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.claim(); }), callbacks);
+        });
+    }
+    launch(threshold, prize, callbacks) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.launch(threshold, prize); }), callbacks);
+        });
+    }
+    raffle(callbacks) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.raffle(); }), callbacks);
+        });
+    }
+    finish(winner, callbacks) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.finish(winner); }), callbacks);
         });
     }
 }
