@@ -5,6 +5,7 @@ import { BigNumber, ethers } from "ethers";
 import { Prottery } from "../src/contracts/Prottery";
 import { SDK } from "../src/sdk";
 import { JsonRpcProvider, JsonRpcSigner } from "@ethersproject/providers";
+import { USER_REJECTED_TRANSACTION } from "../src/service";
 
 const ADDRESS = "0x0000000000000000000000000000000000000001";
 
@@ -189,9 +190,28 @@ describe("SDK", () => {
     const onSubmitted = jest.fn();
     const onSuccess = jest.fn();
     const onError = jest.fn();
+    const onRejected = jest.fn();
 
     beforeEach(() => {
       jest.clearAllMocks();
+    });
+
+    describe("when user rejects transaction", () => {
+      test("callbacks onRejected", async () => {
+        const enrollFunction = jest
+          .spyOn(prottery, "enroll")
+          .mockImplementation(() => {
+            throw { reason: USER_REJECTED_TRANSACTION };
+          });
+
+        await sdk.enroll({ onSubmitted, onSuccess, onError, onRejected });
+
+        expect(enrollFunction).toBeCalledTimes(1);
+        expect(onRejected).toBeCalledTimes(1);
+        expect(onSubmitted).not.toBeCalled();
+        expect(onSuccess).not.toBeCalled();
+        expect(onError).not.toBeCalled();
+      });
     });
 
     describe("when transaction fails", () => {
@@ -242,9 +262,28 @@ describe("SDK", () => {
     const onSubmitted = jest.fn();
     const onSuccess = jest.fn();
     const onError = jest.fn();
+    const onRejected = jest.fn();
 
     beforeEach(() => {
       jest.clearAllMocks();
+    });
+
+    describe("when user rejects transaction", () => {
+      test("callbacks onRejected", async () => {
+        const quitFunction = jest
+          .spyOn(prottery, "quit")
+          .mockImplementation(() => {
+            throw { reason: USER_REJECTED_TRANSACTION };
+          });
+
+        await sdk.quit({ onSubmitted, onSuccess, onError, onRejected });
+
+        expect(quitFunction).toBeCalledTimes(1);
+        expect(onRejected).toBeCalledTimes(1);
+        expect(onSubmitted).not.toBeCalled();
+        expect(onSuccess).not.toBeCalled();
+        expect(onError).not.toBeCalled();
+      });
     });
 
     describe("when transaction fails", () => {
@@ -295,9 +334,28 @@ describe("SDK", () => {
     const onSubmitted = jest.fn();
     const onSuccess = jest.fn();
     const onError = jest.fn();
+    const onRejected = jest.fn();
 
     beforeEach(() => {
       jest.clearAllMocks();
+    });
+
+    describe("when user rejects transaction", () => {
+      test("callbacks onRejected", async () => {
+        const claimFunction = jest
+          .spyOn(prottery, "claim")
+          .mockImplementation(() => {
+            throw { reason: USER_REJECTED_TRANSACTION };
+          });
+
+        await sdk.claim({ onSubmitted, onSuccess, onError, onRejected });
+
+        expect(claimFunction).toBeCalledTimes(1);
+        expect(onRejected).toBeCalledTimes(1);
+        expect(onSubmitted).not.toBeCalled();
+        expect(onSuccess).not.toBeCalled();
+        expect(onError).not.toBeCalled();
+      });
     });
 
     describe("when transaction fails", () => {
@@ -348,9 +406,36 @@ describe("SDK", () => {
     const onSubmitted = jest.fn();
     const onSuccess = jest.fn();
     const onError = jest.fn();
+    const onRejected = jest.fn();
 
     beforeEach(() => {
       jest.clearAllMocks();
+    });
+
+    describe("when user rejects transaction", () => {
+      test("callbacks onRejected", async () => {
+        const launchFunction = jest
+          .spyOn(prottery, "launch")
+          .mockImplementation(() => {
+            throw { reason: USER_REJECTED_TRANSACTION };
+          });
+
+        const threshold = BigNumber.from(120);
+        const prize = ethers.utils.parseEther("50");
+
+        await sdk.launch(threshold, prize, {
+          onSubmitted,
+          onSuccess,
+          onError,
+          onRejected,
+        });
+
+        expect(launchFunction).toBeCalledTimes(1);
+        expect(onRejected).toBeCalledTimes(1);
+        expect(onSubmitted).not.toBeCalled();
+        expect(onSuccess).not.toBeCalled();
+        expect(onError).not.toBeCalled();
+      });
     });
 
     describe("when transaction fails", () => {
@@ -407,9 +492,33 @@ describe("SDK", () => {
     const onSubmitted = jest.fn();
     const onSuccess = jest.fn();
     const onError = jest.fn();
+    const onRejected = jest.fn();
 
     beforeEach(() => {
       jest.clearAllMocks();
+    });
+
+    describe("when user rejects transaction", () => {
+      test("callbacks onRejected", async () => {
+        const raffleFunction = jest
+          .spyOn(prottery, "raffle")
+          .mockImplementation(() => {
+            throw { reason: USER_REJECTED_TRANSACTION };
+          });
+
+        await sdk.raffle({
+          onSubmitted,
+          onSuccess,
+          onError,
+          onRejected,
+        });
+
+        expect(raffleFunction).toBeCalledTimes(1);
+        expect(onRejected).toBeCalledTimes(1);
+        expect(onSubmitted).not.toBeCalled();
+        expect(onSuccess).not.toBeCalled();
+        expect(onError).not.toBeCalled();
+      });
     });
 
     describe("when transaction fails", () => {
@@ -460,9 +569,33 @@ describe("SDK", () => {
     const onSubmitted = jest.fn();
     const onSuccess = jest.fn();
     const onError = jest.fn();
+    const onRejected = jest.fn();
 
     beforeEach(() => {
       jest.clearAllMocks();
+    });
+
+    describe("when user rejects transaction", () => {
+      test("callbacks onRejected", async () => {
+        const finishFunction = jest
+          .spyOn(prottery, "finish")
+          .mockImplementation(() => {
+            throw { reason: USER_REJECTED_TRANSACTION };
+          });
+
+        await sdk.finish(ADDRESS, {
+          onSubmitted,
+          onSuccess,
+          onError,
+          onRejected,
+        });
+
+        expect(finishFunction).toBeCalledTimes(1);
+        expect(onRejected).toBeCalledTimes(1);
+        expect(onSubmitted).not.toBeCalled();
+        expect(onSuccess).not.toBeCalled();
+        expect(onError).not.toBeCalled();
+      });
     });
 
     describe("when transaction fails", () => {

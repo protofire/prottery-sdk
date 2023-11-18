@@ -9,16 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Service = void 0;
+exports.Service = exports.USER_REJECTED_TRANSACTION = void 0;
+exports.USER_REJECTED_TRANSACTION = "user rejected transaction";
 class Service {
     submitAction(action, callbacks) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const { onSubmitted, onSuccess, onError, onRejected } = callbacks;
-            let confirmed = false;
             try {
                 const tx = yield action();
-                confirmed = true;
                 if (onSubmitted)
                     onSubmitted({ tx });
                 const receipt = yield tx.wait();
@@ -27,7 +26,7 @@ class Service {
             }
             catch (err) {
                 const providerError = err;
-                if (!confirmed) {
+                if (providerError.reason === exports.USER_REJECTED_TRANSACTION) {
                     if (onRejected)
                         onRejected();
                     return;

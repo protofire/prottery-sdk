@@ -1,19 +1,17 @@
 import { ethers } from "ethers";
 import { CallbackOptionsType } from "./sdk";
 
+export const USER_REJECTED_TRANSACTION = "user rejected transaction";
+
 export abstract class Service {
   protected async submitAction(
     action: () => Promise<ethers.ContractTransaction>,
-    callbacks: CallbackOptionsType,
+    callbacks: CallbackOptionsType
   ) {
     const { onSubmitted, onSuccess, onError, onRejected } = callbacks;
 
-    let confirmed = false;
-
     try {
       const tx = await action();
-
-      confirmed = true;
 
       if (onSubmitted) onSubmitted({ tx });
 
@@ -25,7 +23,7 @@ export abstract class Service {
         reason: string;
       };
 
-      if (!confirmed) {
+      if (providerError.reason === USER_REJECTED_TRANSACTION) {
         if (onRejected) onRejected();
         return;
       }
