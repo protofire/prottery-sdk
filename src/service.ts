@@ -28,7 +28,7 @@ export abstract class Service {
         return;
       }
 
-      if (onError) onError(providerError.reason ?? err);
+      if (onError) onError(err);
     }
   }
 }

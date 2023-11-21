@@ -13,7 +13,7 @@ export type CallbackOptionsType = {
     tx: ethers.ContractTransaction;
     receipt: ethers.ContractReceipt;
   }) => void;
-  onError?: (err: string) => void;
+  onError?: (err: unknown) => void;
   onRejected?: () => void;
 };
 

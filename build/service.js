@@ -13,7 +13,6 @@ exports.Service = exports.USER_REJECTED_TRANSACTION = void 0;
 exports.USER_REJECTED_TRANSACTION = "user rejected transaction";
 class Service {
     submitAction(action, callbacks) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const { onSubmitted, onSuccess, onError, onRejected } = callbacks;
             try {
@@ -32,7 +31,7 @@ class Service {
                     return;
                 }
                 if (onError)
-                    onError((_a = providerError.reason) !== null && _a !== void 0 ? _a : err);
+                    onError(err);
             }
         });
     }
