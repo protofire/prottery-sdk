@@ -14,6 +14,7 @@ const service_1 = require("./service");
 const contracts_1 = require("./contracts");
 const config_1 = require("./config");
 const graph_1 = require("./graph");
+const token_1 = require("./token");
 const isSigner = (signerOrProvider) => {
     return (signerOrProvider.getSigner ===
         undefined);
@@ -32,6 +33,7 @@ class SDK extends service_1.Service {
         }
         this.chainId = chainId !== null && chainId !== void 0 ? chainId : this.DEFAULT_CHAIN_ID;
         this.contract = contracts_1.Prottery__factory.connect(config_1.config.get(this.chainId).PROTTERY, this.signer);
+        this.token = new token_1.Token(this);
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {

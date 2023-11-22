@@ -4,23 +4,10 @@ import { Prottery__factory } from "../src/contracts/factories/Prottery__factory"
 import { BigNumber, ethers } from "ethers";
 import { Prottery } from "../src/contracts/Prottery";
 import { SDK } from "../src/sdk";
-import { JsonRpcProvider, JsonRpcSigner } from "@ethersproject/providers";
 import { USER_REJECTED_TRANSACTION } from "../src/service";
+import { mockSdk } from "./utils";
 
 const ADDRESS = "0x0000000000000000000000000000000000000001";
-
-const mockSdk = () => {
-  const mockSigner = mock<JsonRpcSigner>();
-  mockSigner.getAddress.calledWith().mockImplementation(async () => ADDRESS);
-  const mockProvider = mock<JsonRpcProvider>();
-  mockProvider.getSigner.calledWith().mockImplementation(() => mockSigner);
-
-  const sdk = new SDK({
-    signerOrProvider: mockProvider,
-  });
-
-  return sdk;
-};
 
 describe("SDK", () => {
   let sdk: SDK;
@@ -29,7 +16,7 @@ describe("SDK", () => {
   beforeEach(() => {
     prottery = mock<Prottery>();
     jest.spyOn(Prottery__factory, "connect").mockImplementation(() => prottery);
-    sdk = mockSdk();
+    sdk = mockSdk(ADDRESS);
   });
 
   describe("init", () => {

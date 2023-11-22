@@ -6,7 +6,7 @@ export const USER_REJECTED_TRANSACTION = "user rejected transaction";
 export abstract class Service {
   protected async submitAction(
     action: () => Promise<ethers.ContractTransaction>,
-    callbacks: CallbackOptionsType
+    callbacks: CallbackOptionsType,
   ) {
     const { onSubmitted, onSuccess, onError, onRejected } = callbacks;
 

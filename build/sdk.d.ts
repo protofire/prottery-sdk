@@ -2,6 +2,7 @@ import { BigNumber, Signer, ethers } from "ethers";
 import { Service } from "./service";
 import { Prottery } from "./contracts";
 import { Graph } from "./graph";
+import { Token } from "./token";
 export type CallbackOptionsType = {
     onSubmitted?: ({ tx }: {
         tx: ethers.ContractTransaction;
@@ -20,6 +21,7 @@ export declare class SDK extends Service {
     chainId: number;
     DEFAULT_CHAIN_ID: number;
     graph?: Graph;
+    token: Token;
     constructor({ signerOrProvider, chainId, subgraphUri, }: {
         signerOrProvider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider | ethers.Signer;
         chainId?: number;

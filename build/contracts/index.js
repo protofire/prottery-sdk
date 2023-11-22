@@ -23,7 +23,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Prottery__factory = exports.factories = void 0;
+exports.Prottery__factory = exports.ERC20__factory = exports.factories = void 0;
 exports.factories = __importStar(require("./factories"));
+var ERC20__factory_1 = require("./factories/ERC20__factory");
+Object.defineProperty(exports, "ERC20__factory", { enumerable: true, get: function () { return ERC20__factory_1.ERC20__factory; } });
 var Prottery__factory_1 = require("./factories/Prottery__factory");
 Object.defineProperty(exports, "Prottery__factory", { enumerable: true, get: function () { return Prottery__factory_1.Prottery__factory; } });

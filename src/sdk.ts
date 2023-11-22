@@ -3,6 +3,7 @@ import { Service } from "./service";
 import { Prottery, Prottery__factory } from "./contracts";
 import { config } from "./config";
 import { Graph } from "./graph";
+import { Token } from "./token";
 
 export type CallbackOptionsType = {
   onSubmitted?: ({ tx }: { tx: ethers.ContractTransaction }) => void;
@@ -36,6 +37,7 @@ export class SDK extends Service {
   public chainId: number;
   public DEFAULT_CHAIN_ID = 11155111;
   public graph?: Graph;
+  public token: Token;
 
   constructor({
     signerOrProvider,
@@ -63,6 +65,7 @@ export class SDK extends Service {
       config.get(this.chainId)!.PROTTERY,
       this.signer,
     );
+    this.token = new Token(this);
   }
 
   public async init(): Promise<void> {
