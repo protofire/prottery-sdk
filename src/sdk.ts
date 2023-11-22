@@ -31,6 +31,7 @@ const isSigner = (
 };
 
 export class SDK extends Service {
+  public contractAddress: string;
   public contract: Prottery;
   public signer: Signer;
   public address?: string;
@@ -61,8 +62,11 @@ export class SDK extends Service {
     }
 
     this.chainId = chainId ?? this.DEFAULT_CHAIN_ID;
+
+    this.contractAddress = config.get(this.chainId)!.PROTTERY;
+
     this.contract = Prottery__factory.connect(
-      config.get(this.chainId)!.PROTTERY,
+      this.contractAddress,
       this.signer,
     );
     this.token = new Token(this);

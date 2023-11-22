@@ -8,5 +8,6 @@ export declare class Token extends Service {
     address: string;
     constructor(_sdk: SDK);
     approve(value: BigNumber, callbacks: CallbackOptionsType): Promise<void>;
+    allowance(): Promise<BigNumber>;
 }
 //# sourceMappingURL=token.d.ts.map

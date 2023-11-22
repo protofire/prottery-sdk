@@ -15,6 +15,7 @@ export type CallbackOptionsType = {
     onRejected?: () => void;
 };
 export declare class SDK extends Service {
+    contractAddress: string;
     contract: Prottery;
     signer: Signer;
     address?: string;

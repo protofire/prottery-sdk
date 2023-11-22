@@ -4,7 +4,7 @@ import { SDK } from "../src/sdk";
 import { mockSdk } from "./utils";
 import { ERC20, ERC20__factory } from "../src/contracts";
 import { mock } from "jest-mock-extended";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { USER_REJECTED_TRANSACTION } from "../src/service";
 
 const ADDRESS = "0x0000000000000000000000000000000000000001";
@@ -53,7 +53,7 @@ describe("Token", () => {
         });
 
         expect(func).toBeCalledTimes(1);
-        expect(func).toBeCalledWith(token.address, amount);
+        expect(func).toBeCalledWith(sdk.contractAddress, amount);
         expect(onSubmitted).toBeCalledTimes(1);
         expect(onSuccess).toBeCalledTimes(1);
         expect(onError).not.toBeCalled();
@@ -78,7 +78,7 @@ describe("Token", () => {
         await token.approve(amount, { onSubmitted, onSuccess, onError });
 
         expect(func).toBeCalledTimes(1);
-        expect(func).toBeCalledWith(token.address, amount);
+        expect(func).toBeCalledWith(sdk.contractAddress, amount);
         expect(onSubmitted).toBeCalledTimes(1);
         expect(onSuccess).not.toBeCalledTimes(1);
         expect(onError).toBeCalledTimes(1);
@@ -102,12 +102,27 @@ describe("Token", () => {
         });
 
         expect(func).toBeCalledTimes(1);
-        expect(func).toBeCalledWith(token.address, amount);
+        expect(func).toBeCalledWith(sdk.contractAddress, amount);
         expect(onRejected).toBeCalledTimes(1);
         expect(onSubmitted).not.toBeCalled();
         expect(onSuccess).not.toBeCalled();
         expect(onError).not.toBeCalled();
       });
+    });
+  });
+
+  describe("allowance", () => {
+    test("returns allowance", async () => {
+      const expectedAllowance = ethers.utils.parseEther("5");
+
+      const func = jest
+        .spyOn(erc20, "allowance")
+        .mockImplementation(async () => expectedAllowance);
+
+      const allowance = await token.allowance();
+
+      expect(func).toBeCalledTimes(1);
+      expect(allowance).toEqual(expectedAllowance);
     });
   });
 });

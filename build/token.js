@@ -23,8 +23,13 @@ class Token extends service_1.Service {
     approve(value, callbacks) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () {
-                return this.contract.approve(this.address, value);
+                return this.contract.approve(this.sdk.contractAddress, value);
             }), callbacks);
+        });
+    }
+    allowance() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.contract.allowance(this.sdk.address, this.sdk.contractAddress);
         });
     }
 }

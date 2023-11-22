@@ -32,7 +32,8 @@ class SDK extends service_1.Service {
             this.signer = signerOrProvider.getSigner();
         }
         this.chainId = chainId !== null && chainId !== void 0 ? chainId : this.DEFAULT_CHAIN_ID;
-        this.contract = contracts_1.Prottery__factory.connect(config_1.config.get(this.chainId).PROTTERY, this.signer);
+        this.contractAddress = config_1.config.get(this.chainId).PROTTERY;
+        this.contract = contracts_1.Prottery__factory.connect(this.contractAddress, this.signer);
         this.token = new token_1.Token(this);
     }
     init() {

@@ -18,10 +18,14 @@ export class Token extends Service {
 
   public async approve(
     value: BigNumber,
-    callbacks: CallbackOptionsType,
+    callbacks: CallbackOptionsType
   ): Promise<void> {
     await this.submitAction(async () => {
-      return this.contract.approve(this.address, value);
+      return this.contract.approve(this.sdk.contractAddress, value);
     }, callbacks);
+  }
+
+  public async allowance(): Promise<BigNumber> {
+    return await this.contract.allowance(this.sdk.address!, this.sdk.contractAddress);
   }
 }
