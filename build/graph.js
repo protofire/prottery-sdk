@@ -26,15 +26,61 @@ class Graph {
     }
     getParticipants() {
         return __awaiter(this, void 0, void 0, function* () {
-            const body = `
+            const query = (0, core_1.gql) `
       query GetParticipants {
         participants {
           id
         }
       }
     `;
-            const { data: { participants }, } = yield this.query(body);
+            const { data: { participants }, } = yield this.client.query({
+                query,
+            });
             return participants;
+        });
+    }
+    getGlobalStat() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = "0x63757272656e74";
+            const query = (0, core_1.gql) `
+      query GetGlobalStat($id: String!) {
+        globalStat(id: $id) {
+          currentLotteryId
+        }
+      }
+    `;
+            const { data: { globalStat }, } = yield this.client.query({
+                query,
+                variables: { id },
+            });
+            return globalStat;
+        });
+    }
+    getActiveLottery() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const globalStat = yield this.getGlobalStat();
+            return yield this.getLottery(globalStat.currentLotteryId);
+        });
+    }
+    getLottery(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const query = (0, core_1.gql) `
+      query GetLottery($id: String!) {
+        lottery(id: $id) {
+          id
+          threshold
+          prize
+          blockNumber
+          blockTimestamp
+          transactionHash
+        }
+      }
+    `;
+            const { data: { lottery }, } = yield this.client.query({
+                query,
+                variables: { id },
+            });
+            return lottery;
         });
     }
 }
