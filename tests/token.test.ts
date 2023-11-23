@@ -4,7 +4,7 @@ import { SDK } from "../src/sdk";
 import { mockSdk } from "./utils";
 import { ERC20, ERC20__factory } from "../src/contracts";
 import { mock } from "jest-mock-extended";
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 import { USER_REJECTED_TRANSACTION } from "../src/service";
 
 const ADDRESS = "0x0000000000000000000000000000000000000001";
