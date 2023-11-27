@@ -22,7 +22,7 @@ const isSigner = (signerOrProvider) => {
 class SDK extends service_1.Service {
     constructor({ signerOrProvider, chainId, subgraphUri, }) {
         super();
-        this.DEFAULT_CHAIN_ID = 11155111;
+        this.DEFAULT_CHAIN_ID = 421614;
         if (subgraphUri)
             this.graph = new graph_1.Graph(subgraphUri);
         if (isSigner(signerOrProvider)) {

@@ -36,7 +36,7 @@ export class SDK extends Service {
   public signer: Signer;
   public address?: string;
   public chainId: number;
-  public DEFAULT_CHAIN_ID = 11155111;
+  public DEFAULT_CHAIN_ID = 421614;
   public graph?: Graph;
   public token: Token;
 

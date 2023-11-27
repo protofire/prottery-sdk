@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.config = void 0;
 exports.config = new Map([
     [
-        11155111,
+        421614,
         {
-            PROTTERY: "0x94aF31F385a8253Dd4c5B74E56e6c21bAE242826",
-            TOKEN: "0x2b46F98F0211444cd4DD879CB0f36F507EB47038",
+            PROTTERY: "0x906a022A544c45Bb297eC2b2f635d79A733E04ad",
+            TOKEN: "0xf8c05dCF59E8B28BFD5eed176C562bEbcfc7Ac04",
         },
     ],
 ]);
