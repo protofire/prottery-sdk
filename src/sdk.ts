@@ -120,6 +120,10 @@ export class SDK extends Service {
     return await this.contract.token();
   }
 
+  public async isDelegator(account: string): Promise<boolean> {
+    return await this.contract.isDelegator(account);
+  }
+
   public async enroll(options: OptionsType): Promise<void> {
     const { overrides, ...callbacks } = options;
 

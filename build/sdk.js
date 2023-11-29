@@ -102,6 +102,11 @@ class SDK extends service_1.Service {
             return yield this.contract.token();
         });
     }
+    isDelegator(account) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.contract.isDelegator(account);
+        });
+    }
     enroll(options) {
         return __awaiter(this, void 0, void 0, function* () {
             const { overrides } = options, callbacks = __rest(options, ["overrides"]);

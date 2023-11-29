@@ -172,6 +172,21 @@ describe("SDK", () => {
     });
   });
 
+  describe("isDelegator", () => {
+    test("returns boolean", async () => {
+      const result = true;
+
+      const func = jest
+        .spyOn(prottery, "isDelegator")
+        .mockImplementation(async () => result);
+
+      const value = await sdk.isDelegator(ADDRESS);
+
+      expect(func).toBeCalledTimes(1);
+      expect(value).toEqual(result);
+    });
+  });
+
   describe("enroll", () => {
     const tx = mock<ethers.ContractTransaction>();
     const onSubmitted = jest.fn();

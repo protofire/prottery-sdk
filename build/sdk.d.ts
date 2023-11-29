@@ -42,6 +42,7 @@ export declare class SDK extends Service {
     getStatus(): Promise<number>;
     getThreshold(): Promise<BigNumber>;
     getToken(): Promise<string>;
+    isDelegator(account: string): Promise<boolean>;
     enroll(options: OptionsType): Promise<void>;
     quit(options: OptionsType): Promise<void>;
     claim(options: OptionsType): Promise<void>;
