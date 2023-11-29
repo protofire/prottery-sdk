@@ -14,6 +14,9 @@ export type CallbackOptionsType = {
     onError?: (err: unknown) => void;
     onRejected?: () => void;
 };
+export type OptionsType = CallbackOptionsType & {
+    overrides?: ethers.Overrides;
+};
 export declare class SDK extends Service {
     contractAddress: string;
     contract: Prottery;
@@ -39,11 +42,11 @@ export declare class SDK extends Service {
     getStatus(): Promise<number>;
     getThreshold(): Promise<BigNumber>;
     getToken(): Promise<string>;
-    enroll(callbacks: CallbackOptionsType): Promise<void>;
-    quit(callbacks: CallbackOptionsType): Promise<void>;
-    claim(callbacks: CallbackOptionsType): Promise<void>;
-    launch(threshold: BigNumber, prize: BigNumber, callbacks: CallbackOptionsType): Promise<void>;
-    raffle(callbacks: CallbackOptionsType): Promise<void>;
-    finish(winner: string, callbacks: CallbackOptionsType): Promise<void>;
+    enroll(options: OptionsType): Promise<void>;
+    quit(options: OptionsType): Promise<void>;
+    claim(options: OptionsType): Promise<void>;
+    launch(threshold: BigNumber, prize: BigNumber, options: OptionsType): Promise<void>;
+    raffle(options: OptionsType): Promise<void>;
+    finish(winner: string, options: OptionsType): Promise<void>;
 }
 //# sourceMappingURL=sdk.d.ts.map

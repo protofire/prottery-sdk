@@ -1,6 +1,6 @@
 import { ERC20, ERC20__factory } from "./contracts";
 import { config } from "./config";
-import { CallbackOptionsType, SDK } from "./sdk";
+import { OptionsType, SDK } from "./sdk";
 import { Service } from "./service";
 import { BigNumber } from "ethers";
 
@@ -16,13 +16,16 @@ export class Token extends Service {
     this.contract = ERC20__factory.connect(this.address, _sdk.signer);
   }
 
-  public async approve(
-    value: BigNumber,
-    callbacks: CallbackOptionsType,
-  ): Promise<void> {
-    await this.submitAction(async () => {
-      return this.contract.approve(this.sdk.contractAddress, value);
-    }, callbacks);
+  public async approve(value: BigNumber, options: OptionsType): Promise<void> {
+    const { overrides, ...callbacks } = options;
+
+    const action = async () => {
+      return this.contract.approve(this.sdk.contractAddress, value, {
+        ...overrides,
+      });
+    };
+
+    await this.submitAction(action, callbacks);
   }
 
   public async allowance(): Promise<BigNumber> {

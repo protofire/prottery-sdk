@@ -8,6 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SDK = void 0;
 const service_1 = require("./service");
@@ -91,34 +102,46 @@ class SDK extends service_1.Service {
             return yield this.contract.token();
         });
     }
-    enroll(callbacks) {
+    enroll(options) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.enroll(); }), callbacks);
+            const { overrides } = options, callbacks = __rest(options, ["overrides"]);
+            const action = () => __awaiter(this, void 0, void 0, function* () { return this.contract.enroll(Object.assign({}, overrides)); });
+            yield this.submitAction(action, callbacks);
         });
     }
-    quit(callbacks) {
+    quit(options) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.quit(); }), callbacks);
+            const { overrides } = options, callbacks = __rest(options, ["overrides"]);
+            const action = () => __awaiter(this, void 0, void 0, function* () { return this.contract.quit(Object.assign({}, overrides)); });
+            yield this.submitAction(action, callbacks);
         });
     }
-    claim(callbacks) {
+    claim(options) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.claim(); }), callbacks);
+            const { overrides } = options, callbacks = __rest(options, ["overrides"]);
+            const action = () => __awaiter(this, void 0, void 0, function* () { return this.contract.claim(Object.assign({}, overrides)); });
+            yield this.submitAction(action, callbacks);
         });
     }
-    launch(threshold, prize, callbacks) {
+    launch(threshold, prize, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.launch(threshold, prize); }), callbacks);
+            const { overrides } = options, callbacks = __rest(options, ["overrides"]);
+            const action = () => __awaiter(this, void 0, void 0, function* () { return this.contract.launch(threshold, prize, Object.assign({}, overrides)); });
+            yield this.submitAction(action, callbacks);
         });
     }
-    raffle(callbacks) {
+    raffle(options) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.raffle(); }), callbacks);
+            const { overrides } = options, callbacks = __rest(options, ["overrides"]);
+            const action = () => __awaiter(this, void 0, void 0, function* () { return this.contract.raffle(Object.assign({}, overrides)); });
+            yield this.submitAction(action, callbacks);
         });
     }
-    finish(winner, callbacks) {
+    finish(winner, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () { return this.contract.finish(winner); }), callbacks);
+            const { overrides } = options, callbacks = __rest(options, ["overrides"]);
+            const action = () => __awaiter(this, void 0, void 0, function* () { return this.contract.finish(winner, Object.assign({}, overrides)); });
+            yield this.submitAction(action, callbacks);
         });
     }
 }

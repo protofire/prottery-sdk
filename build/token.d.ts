@@ -1,5 +1,5 @@
 import { ERC20 } from "./contracts";
-import { CallbackOptionsType, SDK } from "./sdk";
+import { OptionsType, SDK } from "./sdk";
 import { Service } from "./service";
 import { BigNumber } from "ethers";
 export declare class Token extends Service {
@@ -7,7 +7,7 @@ export declare class Token extends Service {
     sdk: SDK;
     address: string;
     constructor(_sdk: SDK);
-    approve(value: BigNumber, callbacks: CallbackOptionsType): Promise<void>;
+    approve(value: BigNumber, options: OptionsType): Promise<void>;
     allowance(): Promise<BigNumber>;
 }
 //# sourceMappingURL=token.d.ts.map

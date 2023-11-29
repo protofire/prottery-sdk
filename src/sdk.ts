@@ -18,6 +18,10 @@ export type CallbackOptionsType = {
   onRejected?: () => void;
 };
 
+export type OptionsType = CallbackOptionsType & {
+  overrides?: ethers.Overrides;
+};
+
 const isSigner = (
   signerOrProvider:
     | ethers.providers.Web3Provider
@@ -116,40 +120,56 @@ export class SDK extends Service {
     return await this.contract.token();
   }
 
-  public async enroll(callbacks: CallbackOptionsType): Promise<void> {
-    await this.submitAction(async () => this.contract.enroll(), callbacks);
+  public async enroll(options: OptionsType): Promise<void> {
+    const { overrides, ...callbacks } = options;
+
+    const action = async () => this.contract.enroll({ ...overrides });
+
+    await this.submitAction(action, callbacks);
   }
 
-  public async quit(callbacks: CallbackOptionsType): Promise<void> {
-    await this.submitAction(async () => this.contract.quit(), callbacks);
+  public async quit(options: OptionsType): Promise<void> {
+    const { overrides, ...callbacks } = options;
+
+    const action = async () => this.contract.quit({ ...overrides });
+
+    await this.submitAction(action, callbacks);
   }
 
-  public async claim(callbacks: CallbackOptionsType): Promise<void> {
-    await this.submitAction(async () => this.contract.claim(), callbacks);
+  public async claim(options: OptionsType): Promise<void> {
+    const { overrides, ...callbacks } = options;
+
+    const action = async () => this.contract.claim({ ...overrides });
+
+    await this.submitAction(action, callbacks);
   }
 
   public async launch(
     threshold: BigNumber,
     prize: BigNumber,
-    callbacks: CallbackOptionsType,
+    options: OptionsType,
   ): Promise<void> {
-    await this.submitAction(
-      async () => this.contract.launch(threshold, prize),
-      callbacks,
-    );
+    const { overrides, ...callbacks } = options;
+
+    const action = async () =>
+      this.contract.launch(threshold, prize, { ...overrides });
+
+    await this.submitAction(action, callbacks);
   }
 
-  public async raffle(callbacks: CallbackOptionsType): Promise<void> {
-    await this.submitAction(async () => this.contract.raffle(), callbacks);
+  public async raffle(options: OptionsType): Promise<void> {
+    const { overrides, ...callbacks } = options;
+
+    const action = async () => this.contract.raffle({ ...overrides });
+
+    await this.submitAction(action, callbacks);
   }
 
-  public async finish(
-    winner: string,
-    callbacks: CallbackOptionsType,
-  ): Promise<void> {
-    await this.submitAction(
-      async () => this.contract.finish(winner),
-      callbacks,
-    );
+  public async finish(winner: string, options: OptionsType): Promise<void> {
+    const { overrides, ...callbacks } = options;
+
+    const action = async () => this.contract.finish(winner, { ...overrides });
+
+    await this.submitAction(action, callbacks);
   }
 }

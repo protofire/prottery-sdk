@@ -8,6 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Token = void 0;
 const contracts_1 = require("./contracts");
@@ -20,11 +31,13 @@ class Token extends service_1.Service {
         this.address = config_1.config.get(_sdk.chainId).TOKEN;
         this.contract = contracts_1.ERC20__factory.connect(this.address, _sdk.signer);
     }
-    approve(value, callbacks) {
+    approve(value, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.submitAction(() => __awaiter(this, void 0, void 0, function* () {
-                return this.contract.approve(this.sdk.contractAddress, value);
-            }), callbacks);
+            const { overrides } = options, callbacks = __rest(options, ["overrides"]);
+            const action = () => __awaiter(this, void 0, void 0, function* () {
+                return this.contract.approve(this.sdk.contractAddress, value, Object.assign({}, overrides));
+            });
+            yield this.submitAction(action, callbacks);
         });
     }
     allowance() {

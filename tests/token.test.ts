@@ -53,7 +53,7 @@ describe("Token", () => {
         });
 
         expect(func).toBeCalledTimes(1);
-        expect(func).toBeCalledWith(sdk.contractAddress, amount);
+        expect(func).toBeCalledWith(sdk.contractAddress, amount, {});
         expect(onSubmitted).toBeCalledTimes(1);
         expect(onSuccess).toBeCalledTimes(1);
         expect(onError).not.toBeCalled();
@@ -78,7 +78,7 @@ describe("Token", () => {
         await token.approve(amount, { onSubmitted, onSuccess, onError });
 
         expect(func).toBeCalledTimes(1);
-        expect(func).toBeCalledWith(sdk.contractAddress, amount);
+        expect(func).toBeCalledWith(sdk.contractAddress, amount, {});
         expect(onSubmitted).toBeCalledTimes(1);
         expect(onSuccess).not.toBeCalledTimes(1);
         expect(onError).toBeCalledTimes(1);
@@ -102,7 +102,7 @@ describe("Token", () => {
         });
 
         expect(func).toBeCalledTimes(1);
-        expect(func).toBeCalledWith(sdk.contractAddress, amount);
+        expect(func).toBeCalledWith(sdk.contractAddress, amount, {});
         expect(onRejected).toBeCalledTimes(1);
         expect(onSubmitted).not.toBeCalled();
         expect(onSuccess).not.toBeCalled();
