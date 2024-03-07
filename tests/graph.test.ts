@@ -114,6 +114,7 @@ describe("Graph", () => {
 
       jest.spyOn(Graph.prototype, "getGlobalStat").mockResolvedValue({
         currentLotteryId: id,
+        numberOfParticipants: "0",
       });
 
       const graph = new Graph("https://subgraph-url.com");

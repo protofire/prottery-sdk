@@ -12,6 +12,7 @@ export type Lottery = {
 };
 export type GlobalStat = {
     currentLotteryId: string;
+    numberOfParticipants: string;
 };
 export declare class Graph {
     client: ApolloClient<NormalizedCacheObject>;

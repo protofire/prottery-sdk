@@ -26,7 +26,7 @@ const isSigner = (
   signerOrProvider:
     | ethers.providers.Web3Provider
     | ethers.providers.JsonRpcProvider
-    | ethers.Signer,
+    | ethers.Signer
 ): signerOrProvider is ethers.Signer => {
   return (
     (signerOrProvider as ethers.providers.JsonRpcProvider).getSigner ===
@@ -48,6 +48,7 @@ export class SDK extends Service {
     signerOrProvider,
     chainId,
     subgraphUri,
+    account,
   }: {
     signerOrProvider:
       | ethers.providers.Web3Provider
@@ -55,6 +56,7 @@ export class SDK extends Service {
       | ethers.Signer;
     chainId?: number;
     subgraphUri?: string;
+    account?: string;
   }) {
     super();
     if (subgraphUri) this.graph = new Graph(subgraphUri);
@@ -62,7 +64,9 @@ export class SDK extends Service {
     if (isSigner(signerOrProvider)) {
       this.signer = signerOrProvider;
     } else {
-      this.signer = signerOrProvider.getSigner();
+      this.signer = signerOrProvider.getSigner(
+        account || "0x0000000000000000000000000000000000000001"
+      );
     }
 
     this.chainId = chainId ?? this.DEFAULT_CHAIN_ID;
@@ -71,13 +75,17 @@ export class SDK extends Service {
 
     this.contract = Prottery__factory.connect(
       this.contractAddress,
-      this.signer,
+      this.signer
     );
     this.token = new Token(this);
   }
 
   public async init(): Promise<void> {
-    this.address = await this.signer.getAddress();
+    try {
+      this.address = await this.signer.getAddress();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public async getNumberOfParticipants(): Promise<BigNumber> {
@@ -151,7 +159,7 @@ export class SDK extends Service {
   public async launch(
     threshold: BigNumber,
     prize: BigNumber,
-    options: OptionsType,
+    options: OptionsType
   ): Promise<void> {
     const { overrides, ...callbacks } = options;
 

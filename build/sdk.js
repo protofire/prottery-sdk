@@ -31,7 +31,7 @@ const isSigner = (signerOrProvider) => {
         undefined);
 };
 class SDK extends service_1.Service {
-    constructor({ signerOrProvider, chainId, subgraphUri, }) {
+    constructor({ signerOrProvider, chainId, subgraphUri, account, }) {
         super();
         this.DEFAULT_CHAIN_ID = 421614;
         if (subgraphUri)
@@ -40,7 +40,7 @@ class SDK extends service_1.Service {
             this.signer = signerOrProvider;
         }
         else {
-            this.signer = signerOrProvider.getSigner();
+            this.signer = signerOrProvider.getSigner(account || "0x0000000000000000000000000000000000000001");
         }
         this.chainId = chainId !== null && chainId !== void 0 ? chainId : this.DEFAULT_CHAIN_ID;
         this.contractAddress = config_1.config.get(this.chainId).PROTTERY;
@@ -49,7 +49,12 @@ class SDK extends service_1.Service {
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.address = yield this.signer.getAddress();
+            try {
+                this.address = yield this.signer.getAddress();
+            }
+            catch (error) {
+                console.log(error);
+            }
         });
     }
     getNumberOfParticipants() {

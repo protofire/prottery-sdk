@@ -46,6 +46,7 @@ class Graph {
       query GetGlobalStat($id: String!) {
         globalStat(id: $id) {
           currentLotteryId
+          numberOfParticipants
         }
       }
     `;

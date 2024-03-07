@@ -20,6 +20,7 @@ export type Lottery = {
 
 export type GlobalStat = {
   currentLotteryId: string;
+  numberOfParticipants: string;
 };
 
 type QueryResult<T, K extends string> = {
@@ -67,6 +68,7 @@ export class Graph {
       query GetGlobalStat($id: String!) {
         globalStat(id: $id) {
           currentLotteryId
+          numberOfParticipants
         }
       }
     `;
