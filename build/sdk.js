@@ -31,11 +31,9 @@ const isSigner = (signerOrProvider) => {
         undefined);
 };
 class SDK extends service_1.Service {
-    constructor({ signerOrProvider, chainId, subgraphUri, account, }) {
+    constructor({ signerOrProvider, chainId, account, }) {
         super();
         this.DEFAULT_CHAIN_ID = 421614;
-        if (subgraphUri)
-            this.graph = new graph_1.Graph(subgraphUri);
         if (isSigner(signerOrProvider)) {
             this.signer = signerOrProvider;
         }
@@ -43,6 +41,7 @@ class SDK extends service_1.Service {
             this.signer = signerOrProvider.getSigner(account || "0x0000000000000000000000000000000000000001");
         }
         this.chainId = chainId !== null && chainId !== void 0 ? chainId : this.DEFAULT_CHAIN_ID;
+        this.graph = new graph_1.Graph(config_1.config.get(this.chainId).SUBGRAPH);
         this.contractAddress = config_1.config.get(this.chainId).PROTTERY;
         this.contract = contracts_1.Prottery__factory.connect(this.contractAddress, this.signer);
         this.token = new token_1.Token(this);

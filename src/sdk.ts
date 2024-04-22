@@ -47,7 +47,6 @@ export class SDK extends Service {
   constructor({
     signerOrProvider,
     chainId,
-    subgraphUri,
     account,
   }: {
     signerOrProvider:
@@ -55,11 +54,9 @@ export class SDK extends Service {
       | ethers.providers.JsonRpcProvider
       | ethers.Signer;
     chainId?: number;
-    subgraphUri?: string;
     account?: string;
   }) {
     super();
-    if (subgraphUri) this.graph = new Graph(subgraphUri);
 
     if (isSigner(signerOrProvider)) {
       this.signer = signerOrProvider;
@@ -71,6 +68,7 @@ export class SDK extends Service {
 
     this.chainId = chainId ?? this.DEFAULT_CHAIN_ID;
 
+    this.graph = new Graph(config.get(this.chainId)!.SUBGRAPH);
     this.contractAddress = config.get(this.chainId)!.PROTTERY;
 
     this.contract = Prottery__factory.connect(

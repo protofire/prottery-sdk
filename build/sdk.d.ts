@@ -26,10 +26,9 @@ export declare class SDK extends Service {
     DEFAULT_CHAIN_ID: number;
     graph?: Graph;
     token: Token;
-    constructor({ signerOrProvider, chainId, subgraphUri, account, }: {
+    constructor({ signerOrProvider, chainId, account, }: {
         signerOrProvider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider | ethers.Signer;
         chainId?: number;
-        subgraphUri?: string;
         account?: string;
     });
     init(): Promise<void>;
